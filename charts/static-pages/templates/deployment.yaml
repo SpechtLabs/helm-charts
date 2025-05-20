@@ -74,6 +74,8 @@ spec:
             - name: config
               mountPath: /data/
               readOnly: true
+            - name: tmp-volume
+              mountPath: /tmp
       {{- with .Values.staticpages.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -93,3 +95,5 @@ spec:
             items:
               - key: config.yaml
                 path: config.yaml
+        - name: tmp-volume
+          emptyDir: {}
