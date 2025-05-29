@@ -18,7 +18,7 @@ This Helm Chart simplifies deploying [Static Pages](https://github.com/SpechtLab
 ### 1. Install the Chart
 
 ```bash
-helm repo add spechtlabs https://spechtlabs.github.io/helm-charts/
+helm repo add spechtlabs https://charts.specht-labs.de
 helm install staticpages spechtlabs/staticpages -n static-pages --create-namespace -f my-values.yaml
 ```
 
