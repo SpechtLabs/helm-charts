@@ -3,6 +3,29 @@ entries:
   hugo-hoster:
   - apiVersion: v2
     appVersion: 0.0.2
+    created: "2025-05-29T15:32:54.396223248Z"
+    description: A Helm chart for hosting hugo blogs in Kubernetes with S3 to serve
+      the static content.
+    digest: 1fa4379de9498a04a4f8d3c6c499ae5d2d8bb96bbadaffad5b8ec675c6c6844a
+    home: https://github.com/cedi/hugohoster-api
+    keywords:
+    - hugo
+    - staticpage
+    - html
+    - hosting
+    kubeVersion: '>=v1.23.0-0'
+    maintainers:
+    - name: cedi
+      url: https://cedi.dev
+    name: hugo-hoster
+    sources:
+    - https://github.com/hugo-hoster/hugo-hoster
+    type: application
+    urls:
+    - https://github.com/SpechtLabs/helm-charts/releases/download/hugo-hoster-0.0.9/hugo-hoster-0.0.9.tgz
+    version: 0.0.9
+  - apiVersion: v2
+    appVersion: 0.0.2
     created: "2025-03-21T23:45:27.947814866Z"
     description: A Helm chart for hosting hugo blogs in Kubernetes with S3 to serve
       the static content.
@@ -71,6 +94,43 @@ entries:
     - https://github.com/specht-labs/helm-charts/releases/download/hugo-hoster-0.0.5/hugo-hoster-0.0.5.tgz
     version: 0.0.5
   static-pages:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: GitHub
+          url: https://github.com/SpechtLabs/StaticPages
+        - name: Documentation
+          url: http://staticpages.specht-labs.de
+      artifacthub.io/maintainers: |
+        - name: SpechtLabs
+          email: contact@specht-labs.de
+      category: Web Applications
+    apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-05-29T15:32:54.525360396Z"
+    description: 'A Helm chart for deploying the StaticPages hosting platform. StaticPages
+      serves pre-built static sites via reverse proxy to an S3-compatible backend,
+      supporting preview and production builds via subdomains like <branch>.domain.tld. '
+    digest: 7617388cd18e08f293eb62dbf997630c75910eff931a7114eb853a0a564bacb0
+    home: https://github.com/SpechtLabs/StaticPages
+    keywords:
+    - staticpage
+    - static site
+    - s3
+    - html
+    - hosting
+    - reverse-proxy
+    kubeVersion: '>=1.23.0'
+    maintainers:
+    - name: SpechtLabs
+      url: https://specht-labs.de
+    name: static-pages
+    sources:
+    - https://github.com/SpechtLabs/StaticPages
+    type: application
+    urls:
+    - https://github.com/SpechtLabs/helm-charts/releases/download/static-pages-0.1.3/static-pages-0.1.3.tgz
+    version: 0.1.3
   - annotations:
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |
@@ -185,6 +245,30 @@ entries:
   urlshortener:
   - apiVersion: v2
     appVersion: 0.2.0
+    created: "2025-05-29T15:32:54.67315288Z"
+    description: A Helm chart for urlshortener, a Kubernetes native URL Shortening
+      and redirection service.
+    digest: 4e476b607758fc0599b791dc93a44033ed58454b6a4619a23e1b22986789066c
+    home: https://github.com/cedi/urlshortener
+    keywords:
+    - urlshortener
+    - redirection
+    - shortlink
+    - tinyurl
+    kubeVersion: '>=v1.23.0-0'
+    maintainers:
+    - name: cedi
+      url: https://cedi.dev
+    name: urlshortener
+    sources:
+    - https://github.com/cedi/urlshortener
+    - https://github.com/cedi/urlshortener-api
+    type: application
+    urls:
+    - https://github.com/SpechtLabs/helm-charts/releases/download/urlshortener-0.0.16/urlshortener-0.0.16.tgz
+    version: 0.0.16
+  - apiVersion: v2
+    appVersion: 0.2.0
     created: "2025-03-21T23:45:28.039122675Z"
     description: A Helm chart for urlshortener, a Kubernetes native URL Shortening
       and redirection service.
@@ -255,4 +339,4 @@ entries:
     urls:
     - https://github.com/specht-labs/helm-charts/releases/download/urlshortener-0.0.13/urlshortener-0.0.13.tgz
     version: 0.0.13
-generated: "2025-05-29T15:05:26.449960935Z"
+generated: "2025-05-29T15:32:54.673193398Z"
