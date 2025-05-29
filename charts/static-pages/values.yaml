@@ -91,7 +91,7 @@ staticpages:
     hosts:
       - host: example.com
         paths:
-          - path: /
+          - path: /api
             pathType: ImplementationSpecific
     tls:
       - secretName: chart-example-local-tls
