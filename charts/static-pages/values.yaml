@@ -49,7 +49,7 @@ staticpages:
     repository: ghcr.io/spechtlabs/staticpages
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "main"
+    tag: ""
 
   # Extra env variables to pass to the StaticPages container
   env: []
