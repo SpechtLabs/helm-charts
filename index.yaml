@@ -319,6 +319,30 @@ entries:
   urlshortener:
   - apiVersion: v2
     appVersion: 0.2.0
+    created: "2025-06-05T13:57:31.595545128Z"
+    description: A Helm chart for urlshortener, a Kubernetes native URL Shortening
+      and redirection service.
+    digest: fd165eea3f25108143cc25663f939c924776b038318a2dff3cdb62358f08b27d
+    home: https://github.com/cedi/urlshortener
+    keywords:
+    - urlshortener
+    - redirection
+    - shortlink
+    - tinyurl
+    kubeVersion: '>=v1.23.0-0'
+    maintainers:
+    - name: cedi
+      url: https://cedi.dev
+    name: urlshortener
+    sources:
+    - https://github.com/cedi/urlshortener
+    - https://github.com/cedi/urlshortener-api
+    type: application
+    urls:
+    - https://github.com/SpechtLabs/helm-charts/releases/download/urlshortener-0.0.17/urlshortener-0.0.17.tgz
+    version: 0.0.17
+  - apiVersion: v2
+    appVersion: 0.2.0
     created: "2025-05-29T15:32:54.67315288Z"
     description: A Helm chart for urlshortener, a Kubernetes native URL Shortening
       and redirection service.
@@ -413,4 +437,4 @@ entries:
     urls:
     - https://github.com/specht-labs/helm-charts/releases/download/urlshortener-0.0.13/urlshortener-0.0.13.tgz
     version: 0.0.13
-generated: "2025-06-03T14:18:27.338969962Z"
+generated: "2025-06-05T13:57:31.59558757Z"
