@@ -60,7 +60,7 @@ spec:
           args:
             - --health-probe-bind-address=:8081
             - --bind-address=:8123
-            - --metrics-bind-address=:{{ .Values.apiServer.metrics.service.servicePort }}
+            - --metrics-bind-address=:{{ .Values.urlshortener.metrics.service.servicePort }}
 
           {{- with .Values.urlshortener.extraArgs }}
             {{- toYaml . | nindent 12 }}
