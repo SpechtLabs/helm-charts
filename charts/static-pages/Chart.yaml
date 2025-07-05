@@ -6,8 +6,8 @@ description: |
   supporting preview and production builds via subdomains like <branch>.domain.tld.
 type: application
 
-version: 0.1.5
-appVersion: "0.1.0"
+version: 0.1.6
+appVersion: "v0.1.0"
 
 home: https://github.com/SpechtLabs/StaticPages
 sources:
