@@ -106,6 +106,43 @@ entries:
           email: contact@specht-labs.de
       category: Web Applications
     apiVersion: v2
+    appVersion: v0.1.0
+    created: "2025-07-05T19:04:21.94968457Z"
+    description: 'A Helm chart for deploying the StaticPages hosting platform. StaticPages
+      serves pre-built static sites via reverse proxy to an S3-compatible backend,
+      supporting preview and production builds via subdomains like <branch>.domain.tld. '
+    digest: 2025bef2496efc7fecf3cf759dca70dbbc41baa0ad39f6287f1d7af6ad723fd6
+    home: https://github.com/SpechtLabs/StaticPages
+    keywords:
+    - staticpage
+    - static site
+    - s3
+    - html
+    - hosting
+    - reverse-proxy
+    kubeVersion: '>=1.23.0'
+    maintainers:
+    - name: SpechtLabs
+      url: https://specht-labs.de
+    name: static-pages
+    sources:
+    - https://github.com/SpechtLabs/StaticPages
+    type: application
+    urls:
+    - https://github.com/SpechtLabs/helm-charts/releases/download/static-pages-0.1.6/static-pages-0.1.6.tgz
+    version: 0.1.6
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: GitHub
+          url: https://github.com/SpechtLabs/StaticPages
+        - name: Documentation
+          url: http://staticpages.specht-labs.de
+      artifacthub.io/maintainers: |
+        - name: SpechtLabs
+          email: contact@specht-labs.de
+      category: Web Applications
+    apiVersion: v2
     appVersion: 0.1.0
     created: "2025-06-03T14:18:27.338930866Z"
     description: 'A Helm chart for deploying the StaticPages hosting platform. StaticPages
@@ -437,4 +474,4 @@ entries:
     urls:
     - https://github.com/specht-labs/helm-charts/releases/download/urlshortener-0.0.13/urlshortener-0.0.13.tgz
     version: 0.0.13
-generated: "2025-06-05T13:57:31.59558757Z"
+generated: "2025-07-05T19:04:21.949722681Z"
