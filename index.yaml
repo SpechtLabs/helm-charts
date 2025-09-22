@@ -353,6 +353,43 @@ entries:
     urls:
     - https://github.com/SpechtLabs/helm-charts/releases/download/static-pages-0.1.0/static-pages-0.1.0.tgz
     version: 0.1.0
+  tka:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: GitHub
+          url: https://github.com/SpechtLabs/tka
+        - name: Documentation
+          url: http://tka.specht-labs.de
+      artifacthub.io/maintainers: |-
+        - name: SpechtLabs
+          email: contact@specht-labs.de
+      category: Web Applications
+    apiVersion: v2
+    appVersion: v0.1.0
+    created: "2025-09-22T19:31:59.058269565Z"
+    description: 'A Helm chart for deploying the Tailscale Kubernetes Auth service.
+      Tailscale Kubernetes Auth is a Kubernetes native Tailscale authentication service. '
+    digest: 0e1152cd0f4e903cdf3fd9ac3c7f2abffb3cc858f0f3b60b6bf92fc1670159de
+    home: https://github.com/SpechtLabs/tka
+    keywords:
+    - tailscale
+    - authentication
+    - kubernetes
+    - rbac
+    - api
+    kubeVersion: '>=1.24.0'
+    maintainers:
+    - name: SpechtLabs
+      url: https://specht-labs.de
+    name: tka
+    sources:
+    - https://github.com/SpechtLabs/tka
+    - https://github.com/SpechtLabs/helm-charts/tree/main/charts/tka
+    type: application
+    urls:
+    - https://github.com/SpechtLabs/helm-charts/releases/download/tka-0.1.0/tka-0.1.0.tgz
+    version: 0.1.0
   urlshortener:
   - apiVersion: v2
     appVersion: 0.2.0
@@ -474,4 +511,4 @@ entries:
     urls:
     - https://github.com/specht-labs/helm-charts/releases/download/urlshortener-0.0.13/urlshortener-0.0.13.tgz
     version: 0.0.13
-generated: "2025-07-05T19:04:21.949722681Z"
+generated: "2025-09-22T19:31:59.058305192Z"
