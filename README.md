@@ -11,10 +11,12 @@
 | [hugo-hoster]    | A Helm chart for hosting hugo blogs in Kubernetes with S3 to serve the static content.     | `0.0.9`  |
 | [urlshortener]   | A Helm chart for urlshortener, a Kubernetes native URL Shortening and redirection service. | `0.0.16` |
 | [static-pages]   | A Helm chart for deploying [Static Pages](https://github.com/SpechtLabs/StaticPages).      | `0.1.3`  |
+| [tka]            | A Helm chart for deploying [tka](https://github.com/SpechtLabs/tka).                       | `0.1.0`  |
 
 [hugo-hoster]: ./charts/hugo-hoster/
 [urlshortener]: ./charts/urlshortener/
 [static-pages]: ./charts/static-pages/
+[tka]: ./charts/tka/
 
 ## 📥 Installation
 

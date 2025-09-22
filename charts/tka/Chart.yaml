@@ -1,0 +1,39 @@
+apiVersion: v2
+name: tka
+description: |
+  A Helm chart for deploying the Tailscale Kubernetes Auth service.
+  Tailscale Kubernetes Auth is a Kubernetes native Tailscale authentication service.
+type: application
+
+version: 0.1.0
+appVersion: "v0.1.0"
+
+home: https://github.com/SpechtLabs/tka
+sources:
+  - https://github.com/SpechtLabs/tka
+  - https://github.com/SpechtLabs/helm-charts/tree/main/charts/tka
+
+maintainers:
+  - name: SpechtLabs
+    url: https://specht-labs.de
+
+keywords:
+  - tailscale
+  - authentication
+  - kubernetes
+  - rbac
+  - api
+
+kubeVersion: ">=1.24.0"
+
+annotations:
+  category: Web Applications
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/links: |
+    - name: GitHub
+      url: https://github.com/SpechtLabs/tka
+    - name: Documentation
+      url: http://tka.specht-labs.de
+  artifacthub.io/maintainers: |
+    - name: SpechtLabs
+      email: contact@specht-labs.de
