@@ -216,5 +216,5 @@ networkPolicy:
   enabled: false
   # Ingress rules
   ingress: []
-  # Egress rules  
+  # Egress rules
   egress: []

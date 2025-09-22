@@ -7,7 +7,7 @@ metadata:
 data:
   config.yaml: |
     debug: {{ .Values.tka.debug }}
-    
+
     tailscale:
       hostname: {{ .Values.tka.tailscale.hostname | quote }}
       port: {{ .Values.tka.tailscale.port }}
@@ -16,26 +16,26 @@ data:
       tailnet: {{ .Values.tka.tailscale.tailnet | quote }}
       {{- end }}
       capName: {{ .Values.tka.tailscale.capName | quote }}
-    
+
     server:
       readTimeout: {{ .Values.tka.server.readTimeout | quote }}
       readHeaderTimeout: {{ .Values.tka.server.readHeaderTimeout | quote }}
       writeTimeout: {{ .Values.tka.server.writeTimeout | quote }}
       idleTimeout: {{ .Values.tka.server.idleTimeout | quote }}
-    
+
     otel:
       endpoint: {{ .Values.tka.otel.endpoint | quote }}
       insecure: {{ .Values.tka.otel.insecure }}
-    
+
     operator:
       namespace: {{ .Values.tka.operator.namespace | quote }}
       clusterName: {{ .Values.tka.operator.clusterName | quote }}
       contextPrefix: {{ .Values.tka.operator.contextPrefix | quote }}
       userPrefix: {{ .Values.tka.operator.userPrefix | quote }}
-    
+
     api:
       retryAfterSeconds: {{ .Values.tka.api.retryAfterSeconds }}
-    
+
     output:
       theme: {{ .Values.tka.output.theme | quote }}
       long: {{ .Values.tka.output.long }}
