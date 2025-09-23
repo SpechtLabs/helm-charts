@@ -67,7 +67,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /metrics
-              port: https
+              port: {{ .Values.tka.tailscale.port }}
               {{- if eq (.Values.tka.tailscale.port | int) 443 }}
               scheme: HTTPS
               {{- else }}
@@ -80,7 +80,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /metrics
-              port: https
+              port: {{ .Values.tka.tailscale.port }}
               {{- if eq (.Values.tka.tailscale.port | int) 443 }}
               scheme: HTTPS
               {{- else }}
