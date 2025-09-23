@@ -39,7 +39,6 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 443
-  metricsPort: 8080
 
 resources:
   limits:

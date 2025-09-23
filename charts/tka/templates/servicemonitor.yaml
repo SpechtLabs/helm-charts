@@ -13,8 +13,15 @@ spec:
     matchLabels:
       {{- include "tka.selectorLabels" . | nindent 6 }}
   endpoints:
-  - port: http-metrics
+  - port: https
     path: {{ .Values.serviceMonitor.path }}
     interval: {{ .Values.serviceMonitor.interval }}
     scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
+    {{- if eq (.Values.tka.tailscale.port | int) 443 }}
+    scheme: https
+    tlsConfig:
+      insecureSkipVerify: true
+    {{- else }}
+    scheme: http
+    {{- end }}
 {{- end }}

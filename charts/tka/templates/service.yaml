@@ -11,9 +11,5 @@ spec:
       targetPort: https
       protocol: TCP
       name: https
-    - port: {{ .Values.service.metricsPort }}
-      targetPort: http-metrics
-      protocol: TCP
-      name: http-metrics
   selector:
     {{- include "tka.selectorLabels" . | nindent 4 }}
