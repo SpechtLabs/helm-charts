@@ -36,10 +36,6 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: ClusterIP
-  port: 443
-
 resources:
   limits:
     cpu: 500m
@@ -47,15 +43,6 @@ resources:
   requests:
     cpu: 100m
     memory: 256Mi
-
-autoscaling:
-  # IMPORTANT: Autoscaling is not supported due to Tailscale node identity conflicts.
-  # Each Tailscale node must have a unique identity, so TKA can only run with 1 replica.
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 1
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
@@ -84,6 +71,10 @@ tka:
     readHeaderTimeout: 5s
     writeTimeout: 20s
     idleTimeout: 120s
+
+  # Health and metrics server configuration
+  health:
+    port: 8080
 
   # OpenTelemetry configuration
   otel:
@@ -160,8 +151,10 @@ serviceMonitor:
   interval: 30s
   # Scrape timeout
   scrapeTimeout: 10s
-  # Path to scrape metrics from
-  path: /metrics
+  # Paths to scrape metrics from
+  paths:
+    - /metrics
+    - /metrics/controller
 
 # PrometheusRule for alerting
 prometheusRule:
@@ -202,13 +195,6 @@ rbac:
   create: true
   # Additional annotations for ClusterRole and ClusterRoleBinding
   annotations: {}
-
-# Pod disruption budget
-# NOTE: Not recommended for TKA since it runs as a single replica due to Tailscale constraints
-podDisruptionBudget:
-  enabled: false
-  minAvailable: 1
-  # maxUnavailable: 1
 
 # Network policies
 networkPolicy:

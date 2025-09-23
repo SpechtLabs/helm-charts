@@ -1,3 +1,0 @@
-{{- if .Values.autoscaling.enabled }}
-{{- fail "Autoscaling is not supported for TKA due to Tailscale node identity conflicts. Set autoscaling.enabled=false and use replicaCount=1." }}
-{{- end }}

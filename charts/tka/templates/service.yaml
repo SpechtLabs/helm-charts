@@ -5,11 +5,11 @@ metadata:
   labels:
     {{- include "tka.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: ClusterIP
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: https
+    - port: {{ .Values.tka.health.port }}
+      targetPort: health
       protocol: TCP
-      name: https
+      name: health
   selector:
     {{- include "tka.selectorLabels" . | nindent 4 }}

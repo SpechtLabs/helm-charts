@@ -5,12 +5,10 @@ metadata:
   labels:
     {{- include "tka.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   {{- if gt (.Values.replicaCount | int) 1 }}
   {{- fail "TKA does not support multiple replicas due to Tailscale node identity conflicts. Set replicaCount=1." }}
   {{- end }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   strategy:
     type: Recreate
   selector:
@@ -47,8 +45,8 @@ spec:
             - "--config"
             - "/etc/tka/config.yaml"
           ports:
-            - name: https
-              containerPort: {{ .Values.tka.tailscale.port }}
+            - name: health
+              containerPort: {{ .Values.tka.health.port }}
               protocol: TCP
           env:
             - name: TS_AUTHKEY
@@ -66,26 +64,18 @@ spec:
             {{- end }}
           livenessProbe:
             httpGet:
-              path: /metrics
-              port: {{ .Values.tka.tailscale.port }}
-              {{- if eq (.Values.tka.tailscale.port | int) 443 }}
-              scheme: HTTPS
-              {{- else }}
+              path: /ready
+              port: health
               scheme: HTTP
-              {{- end }}
             initialDelaySeconds: 60
             periodSeconds: 30
             timeoutSeconds: 10
             failureThreshold: 5
           readinessProbe:
             httpGet:
-              path: /metrics
-              port: {{ .Values.tka.tailscale.port }}
-              {{- if eq (.Values.tka.tailscale.port | int) 443 }}
-              scheme: HTTPS
-              {{- else }}
+              path: /ready
+              port: health
               scheme: HTTP
-              {{- end }}
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5

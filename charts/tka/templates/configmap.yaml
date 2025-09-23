@@ -41,3 +41,6 @@ data:
       long: {{ .Values.tka.output.long }}
       quiet: {{ .Values.tka.output.quiet }}
       markdownlint-fix: {{ .Values.tka.output.markdownlintFix }}
+
+    health:
+      port: {{ .Values.tka.health.port }}

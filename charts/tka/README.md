@@ -183,12 +183,6 @@ helm install tka spechtlabs/tka -n tka-system -f values.yaml
 > [!IMPORTANT]
 > **Scaling Limitations**: TKA cannot scale beyond 1 replica due to Tailscale node identity conflicts. Each Tailscale node requires a unique identity, so running multiple TKA instances would cause authentication failures.
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `replicaCount` | Number of replicas (must be 1) | `1` |
-| `autoscaling.enabled` | Enable horizontal pod autoscaler (not supported) | `false` |
-| `podDisruptionBudget.enabled` | Enable pod disruption budget (not recommended) | `false` |
-
 ## Example Values
 
 ### Basic Configuration
@@ -218,10 +212,6 @@ resources:
 ### Production Configuration
 
 ```yaml
-# values-production.yaml
-# NOTE: replicaCount must always be 1 due to Tailscale constraints
-replicaCount: 1
-
 tka:
   tailscale:
     tailnet: "example.ts.net"
@@ -247,14 +237,6 @@ serviceMonitor:
   enabled: true
   labels:
     release: prometheus
-
-# Pod disruption budget and autoscaling are not supported
-# due to Tailscale's single node identity requirement
-podDisruptionBudget:
-  enabled: false
-
-autoscaling:
-  enabled: false
 
 resources:
   requests:
