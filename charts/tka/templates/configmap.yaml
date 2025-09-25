@@ -1,3 +1,13 @@
+{{- $hasClusterInfo := and .Values.tka.clusterInfo.apiEndpoint (ne .Values.tka.clusterInfo.apiEndpoint "") }}
+{{- $hasConfigMapRef := and .Values.tka.configMapRef.enabled .Values.tka.configMapRef.name .Values.tka.configMapRef.namespace }}
+
+{{- if and $hasClusterInfo $hasConfigMapRef }}
+{{- fail "You cannot configure both clusterInfo.apiEndpoint and configMapRef at the same time. Please use only one configuration method." }}
+{{- end }}
+
+{{- if not (or $hasClusterInfo $hasConfigMapRef) }}
+{{- fail "You must configure either clusterInfo.apiEndpoint or configMapRef to enable cluster connectivity." }}
+{{- end }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -44,3 +54,20 @@ data:
 
     health:
       port: {{ .Values.tka.health.port }}
+
+    clusterInfo:
+      {{- if and .Values.tka.clusterInfo.apiEndpoint (ne .Values.tka.clusterInfo.apiEndpoint "") }}
+      apiEndpoint: {{ .Values.tka.clusterInfo.apiEndpoint | quote }}
+      caData: {{ .Values.tka.clusterInfo.caData | quote }}
+      insecureSkipTLSVerify: {{ .Values.tka.clusterInfo.insecureSkipTLSVerify }}
+      labels: {{ toYaml .Values.tka.clusterInfo.labels | nindent 8 }}
+      {{- else if and .Values.tka.configMapRef.enabled .Values.tka.configMapRef.name .Values.tka.configMapRef.namespace }}
+      configMapRef:
+        name: {{ .Values.tka.configMapRef.name | quote }}
+        namespace: {{ .Values.tka.configMapRef.namespace | quote }}
+        keys:
+          apiEndpoint: {{ .Values.tka.configMapRef.keys.apiEndpoint | quote }}
+          caData: {{ .Values.tka.configMapRef.keys.caData | quote }}
+          insecure: {{ .Values.tka.configMapRef.keys.insecure | quote }}
+      labels: {{ toYaml .Values.tka.configMapRef.labels | nindent 8 }}
+      {{- end }}

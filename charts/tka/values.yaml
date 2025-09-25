@@ -52,6 +52,43 @@ affinity: {}
 
 # TKA Configuration
 tka:
+
+  # Information about the Kubernetes cluster where TKA is deployed
+  # Use either 'clusterInfo' for explicit configuration OR 'configMapRef' for reference-based configuration
+  clusterInfo:
+    # The Kubernetes API endpoint used to connect from the user laptop to the K8s cluster
+    apiEndpoint: ""
+    # The base64-encoded CA certificate data for the Kubernetes API server
+    caData: ""
+    # Whether to skip TLS verification when connecting to the Kubernetes API server
+    insecureSkipTLSVerify: false
+    # Additional labels to add to the cluster info
+    labels: {}
+      # environment: development
+      # project: tka
+
+  # Alternative: Reference to a ConfigMap containing cluster connection details
+  # Use this instead of clusterInfo for future-proof configuration management
+  configMapRef:
+    # Enable configMap reference mode (mutually exclusive with clusterInfo)
+    enabled: false
+    # Name of the ConfigMap containing cluster connection details
+    name: ""
+    # Namespace where the ConfigMap is located
+    namespace: ""
+    # Keys in the ConfigMap for cluster connection details
+    keys:
+      # Key containing the API endpoint
+      apiEndpoint: "apiEndpoint"
+      # Key containing the base64-encoded CA certificate data
+      caData: "caData" 
+      # Key containing the insecure TLS verification flag
+      insecure: "insecure"
+    # Additional labels to add to the cluster info (separate from configMap data)
+    labels: {}
+      # environment: development
+      # project: tka
+
   # Tailscale configuration
   tailscale:
     # Hostname for the tsnet node; also used by the CLI to build https://{hostname}.{tailnet}
