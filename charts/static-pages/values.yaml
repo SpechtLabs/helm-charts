@@ -98,6 +98,63 @@ staticpages:
         hosts:
           - example.com
 
+  gateway:
+    # -- Enable Gateway API HTTPRoutes for StaticPages.
+    enabled: false
+    # -- Create a Gateway resource in this chart. Set to false to attach routes to an existing Gateway.
+    create: false
+    # -- Gateway name. Defaults to the chart fullname when empty.
+    name: ""
+    # -- Namespace of the parent Gateway. Empty means the release namespace.
+    namespace: ""
+    # -- GatewayClass name used when gateway.create is true.
+    gatewayClassName: ""
+    # -- Labels to add to the Gateway when gateway.create is true.
+    labels: {}
+    # -- Annotations to add to the Gateway when gateway.create is true.
+    annotations: {}
+    # -- Gateway listeners rendered when gateway.create is true.
+    listeners:
+      - name: http
+        protocol: HTTP
+        port: 80
+        allowedRoutes:
+          namespaces:
+            from: Same
+    route:
+      # -- Labels to add to generated HTTPRoutes.
+      labels: {}
+      # -- Annotations to add to generated HTTPRoutes.
+      annotations: {}
+      # -- ParentRefs for generated HTTPRoutes. When empty, the chart uses gateway.name/namespace.
+      parentRefs: []
+      # -- Section name on the parent Gateway listener.
+      sectionName: ""
+      # -- Port on the parent Gateway listener.
+      port: null
+    api:
+      # -- Enable the management API HTTPRoute.
+      enabled: true
+      # -- Name of the management API HTTPRoute. Defaults to "<fullname>-api".
+      name: ""
+      # -- Hostnames for the management API route. Defaults to staticpages.ingress.hosts[].host.
+      hostnames: []
+      path:
+        type: PathPrefix
+        value: /api
+    proxy:
+      # -- Enable the page proxy HTTPRoute.
+      enabled: true
+      # -- Name of the page proxy HTTPRoute. Defaults to "<fullname>-proxy".
+      name: ""
+      # -- Hostnames for the page proxy route. Defaults to configs.pages[].domain.
+      hostnames: []
+      # -- Extra hostnames for the page proxy route, such as wildcard preview hosts.
+      additionalHostnames: []
+      path:
+        type: PathPrefix
+        value: /
+
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious

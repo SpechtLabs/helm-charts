@@ -51,6 +51,8 @@ Encrypt this secret with sops and deploy via ksops.
 | `staticpages.env`                    | List of environment variables to set in the container                |
 | `staticpages.extraEnvFrom`           | List of sources (e.g., secrets) to import environment variables from |
 | `staticpages.ingress.enabled`        | Enable ingress for the service                                       |
+| `staticpages.gateway.enabled`        | Enable Gateway API HTTPRoutes for the service                        |
+| `staticpages.gateway.create`         | Create a Gateway instead of attaching to an existing Gateway         |
 | `configs.pages[].domain`             | Domain name to serve                                                 |
 | `configs.pages[].bucket`             | Configuration for the S3 bucket (region, URL, name, credentials)     |
 | `configs.pages[].proxy`              | Configuration for the proxy (URL, path, fallback file, search path)  |
@@ -88,19 +90,73 @@ configs:
 ### Ingress Example
 
 ```yaml
-ingress:
-  enabled: true
-  className: "nginx"
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-  hosts:
-    - host: staticpages.example.com
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls:
-    - secretName: staticpages-tls
-      hosts:
-        - staticpages.example.com
+staticpages:
+  ingress:
+    enabled: true
+    className: "nginx"
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    hosts:
+      - host: staticpages.example.com
+        paths:
+          - path: /api
+            pathType: ImplementationSpecific
+    tls:
+      - secretName: staticpages-tls
+        hosts:
+          - staticpages.example.com
+```
+
+### Gateway API Example
+
+Attach StaticPages routes to an existing Gateway:
+
+```yaml
+staticpages:
+  ingress:
+    enabled: false
+  gateway:
+    enabled: true
+    name: shared
+    namespace: envoy-gateway-system
+    route:
+      port: 443
+    api:
+      hostnames:
+        - pages.example.com
+    proxy:
+      additionalHostnames:
+        - "*.example.com"
+
+configs:
+  pages:
+    - domain: example.com
+```
+
+The chart renders two HTTPRoutes when Gateway API support is enabled:
+
+- `<release>-api` routes `/api` on the configured API hostnames to the management API service.
+- `<release>-proxy` routes `/` on configured page domains plus `proxy.additionalHostnames` to the page proxy service.
+
+Create a dedicated Gateway from the chart:
+
+```yaml
+staticpages:
+  gateway:
+    enabled: true
+    create: true
+    gatewayClassName: envoy
+    listeners:
+      - name: https
+        protocol: HTTPS
+        port: 443
+        hostname: "*.example.com"
+        tls:
+          mode: Terminate
+          certificateRefs:
+            - name: staticpages-tls
+        allowedRoutes:
+          namespaces:
+            from: Same
 ```
