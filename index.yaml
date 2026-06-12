@@ -107,6 +107,43 @@ entries:
       category: Web Applications
     apiVersion: v2
     appVersion: v0.2.0
+    created: "2026-06-12T10:38:49.514491068Z"
+    description: 'A Helm chart for deploying the StaticPages hosting platform. StaticPages
+      serves pre-built static sites via reverse proxy to an S3-compatible backend,
+      supporting preview and production builds via subdomains like <branch>.domain.tld. '
+    digest: ddaeaf88bf44d39e0a0121b6ab62506f9e2d349c9364a4eee9d2fc6d60049c11
+    home: https://github.com/SpechtLabs/StaticPages
+    keywords:
+    - staticpage
+    - static site
+    - s3
+    - html
+    - hosting
+    - reverse-proxy
+    kubeVersion: '>=1.23.0'
+    maintainers:
+    - name: SpechtLabs
+      url: https://specht-labs.de
+    name: static-pages
+    sources:
+    - https://github.com/SpechtLabs/StaticPages
+    type: application
+    urls:
+    - https://github.com/SpechtLabs/helm-charts/releases/download/static-pages-0.1.9/static-pages-0.1.9.tgz
+    version: 0.1.9
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: GitHub
+          url: https://github.com/SpechtLabs/StaticPages
+        - name: Documentation
+          url: http://staticpages.specht-labs.de
+      artifacthub.io/maintainers: |
+        - name: SpechtLabs
+          email: contact@specht-labs.de
+      category: Web Applications
+    apiVersion: v2
+    appVersion: v0.2.0
     created: "2026-06-12T10:18:42.855713329Z"
     description: 'A Helm chart for deploying the StaticPages hosting platform. StaticPages
       serves pre-built static sites via reverse proxy to an S3-compatible backend,
@@ -428,6 +465,42 @@ entries:
     - https://github.com/SpechtLabs/helm-charts/releases/download/static-pages-0.1.0/static-pages-0.1.0.tgz
     version: 0.1.0
   tka:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: GitHub
+          url: https://github.com/SpechtLabs/tka
+        - name: Documentation
+          url: http://tka.specht-labs.de
+      artifacthub.io/maintainers: |
+        - name: SpechtLabs
+          email: contact@specht-labs.de
+      category: Web Applications
+    apiVersion: v2
+    appVersion: v0.1.3
+    created: "2026-06-12T10:38:49.686616783Z"
+    description: 'A Helm chart for deploying the Tailscale Kubernetes Auth service.
+      Tailscale Kubernetes Auth is a Kubernetes native Tailscale authentication service. '
+    digest: 4414af62b77a7f32b1941c002071c3b99415cd1858c727d9edec461dcdaaeb06
+    home: https://github.com/SpechtLabs/tka
+    keywords:
+    - tailscale
+    - authentication
+    - kubernetes
+    - rbac
+    - api
+    kubeVersion: '>=1.24.0'
+    maintainers:
+    - name: SpechtLabs
+      url: https://specht-labs.de
+    name: tka
+    sources:
+    - https://github.com/SpechtLabs/tka
+    - https://github.com/SpechtLabs/helm-charts/tree/main/charts/tka
+    type: application
+    urls:
+    - https://github.com/SpechtLabs/helm-charts/releases/download/tka-0.1.7/tka-0.1.7.tgz
+    version: 0.1.7
   - annotations:
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |
@@ -801,4 +874,4 @@ entries:
     urls:
     - https://github.com/specht-labs/helm-charts/releases/download/urlshortener-0.0.13/urlshortener-0.0.13.tgz
     version: 0.0.13
-generated: "2026-06-12T10:18:42.855759796Z"
+generated: "2026-06-12T10:38:49.686702413Z"
