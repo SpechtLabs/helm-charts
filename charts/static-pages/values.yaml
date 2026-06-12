@@ -51,6 +51,10 @@ staticpages:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
 
+  # -- Value reported as service.version in telemetry (OTEL_SERVICE_VERSION).
+  # Defaults to the chart appVersion when empty.
+  otelServiceVersion: ""
+
   # Extra env variables to pass to the StaticPages container
   env: []
   extraEnvFrom: []

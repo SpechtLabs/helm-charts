@@ -48,6 +48,7 @@ Encrypt this secret with sops and deploy via ksops.
 | `staticpages.replicaCount`           | Number of backend replicas                                           |
 | `staticpages.image.repository`       | Image repository to use (default: `ghcr.io/spechtlabs/staticpages`)  |
 | `staticpages.image.tag`              | Image tag to use (default: `Chart.appVersion`)                       |
+| `staticpages.otelServiceVersion`     | Value reported as `service.version` in telemetry (default: `Chart.appVersion`) |
 | `staticpages.env`                    | List of environment variables to set in the container                |
 | `staticpages.extraEnvFrom`           | List of sources (e.g., secrets) to import environment variables from |
 | `staticpages.ingress.enabled`        | Enable ingress for the service                                       |
