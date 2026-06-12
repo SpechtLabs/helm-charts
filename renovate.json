@@ -20,5 +20,33 @@
       "labels": ["update/major"],
       "assignees": ["cedi"]
     }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Track SpechtLabs/StaticPages releases as the static-pages chart appVersion",
+      "managerFilePatterns": ["/^charts/static-pages/Chart\\.yaml$/"],
+      "matchStrings": ["appVersion:\\s*\"?(?<currentValue>[^\"\\s]+)\"?"],
+      "depNameTemplate": "SpechtLabs/StaticPages",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "description": "Track SpechtLabs/tka releases as the tka chart appVersion",
+      "managerFilePatterns": ["/^charts/tka/Chart\\.yaml$/"],
+      "matchStrings": ["appVersion:\\s*\"?(?<currentValue>[^\"\\s]+)\"?"],
+      "depNameTemplate": "SpechtLabs/tka",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
+    }
+  ],
+  "bumpVersions": [
+    {
+      "name": "Bump the chart version whenever its appVersion (or any dependency) changes",
+      "filePatterns": ["{{packageFileDir}}/Chart.yaml"],
+      "matchStrings": ["(?m)^version:\\s+\"?(?<version>[^\"\\s]+)\"?"],
+      "bumpType": "patch"
+    }
   ]
 }
