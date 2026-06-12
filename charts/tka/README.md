@@ -138,6 +138,7 @@ helm install tka spechtlabs/tka -n tka-system -f values.yaml
 |-----------|-------------|---------|
 | `tka.otel.endpoint` | OpenTelemetry OTLP endpoint | `""` |
 | `tka.otel.insecure` | Use insecure OTLP transport | `true` |
+| `tka.otel.serviceVersion` | Value reported as `service.version` in telemetry (default: `Chart.appVersion`) | `""` |
 | `serviceMonitor.enabled` | Create Prometheus ServiceMonitor | `false` |
 | `serviceMonitor.interval` | Metrics scrape interval | `30s` |
 

@@ -119,6 +119,9 @@ tka:
     endpoint: ""
     # Whether to use insecure transport to the OTLP endpoint
     insecure: true
+    # -- Value reported as service.version in telemetry (OTEL_SERVICE_VERSION).
+    # Defaults to the chart appVersion when empty.
+    serviceVersion: ""
 
   # Kubernetes operator configuration
   operator:

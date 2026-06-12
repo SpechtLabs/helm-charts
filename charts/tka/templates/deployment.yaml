@@ -49,6 +49,11 @@ spec:
               containerPort: {{ .Values.tka.health.port }}
               protocol: TCP
           env:
+            # Reported as service.version in telemetry. Defaults to the chart
+            # appVersion so it tracks the deployed image; override via
+            # tka.otel.serviceVersion.
+            - name: OTEL_SERVICE_VERSION
+              value: {{ .Values.tka.otel.serviceVersion | default .Chart.AppVersion | quote }}
             - name: TS_AUTHKEY
               valueFrom:
                 secretKeyRef:
