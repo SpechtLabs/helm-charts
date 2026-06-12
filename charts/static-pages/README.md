@@ -54,6 +54,11 @@ Encrypt this secret with sops and deploy via ksops.
 | `staticpages.ingress.enabled`        | Enable ingress for the service                                       |
 | `staticpages.gateway.enabled`        | Enable Gateway API HTTPRoutes for the service                        |
 | `staticpages.gateway.create`         | Create a Gateway instead of attaching to an existing Gateway         |
+| `staticpages.gateway.route.parentRefs` | ParentRefs for generated HTTPRoutes (attach to an existing Gateway) |
+| `staticpages.gateway.route.port`     | Pin routes to a specific parent listener port (e.g. 443)            |
+| `staticpages.gateway.proxy.wildcardHostnames` | Derive wildcard preview hostnames: `none`/`perDomain`/`apex` |
+| `staticpages.gateway.proxy.additionalHostnames` | Extra proxy hostnames (e.g. wildcard preview hosts)          |
+| `staticpages.gateway.{api,proxy}.rules` | Raw HTTPRoute rules; replaces the default rule for full Gateway API control |
 | `configs.pages[].domain`             | Domain name to serve                                                 |
 | `configs.pages[].bucket`             | Configuration for the S3 bucket (region, URL, name, credentials)     |
 | `configs.pages[].proxy`              | Configuration for the proxy (URL, path, fallback file, search path)  |
