@@ -75,6 +75,11 @@ spec:
           resources:
             {{- toYaml .Values.dashboard.resources | nindent 12 }}
           env:
+            # Reported as service.version in telemetry. Defaults to the chart
+            # appVersion so it tracks the deployed image; override via
+            # dashboard.otelServiceVersion.
+            - name: OTEL_SERVICE_VERSION
+              value: {{ .Values.dashboard.otelServiceVersion | default .Chart.AppVersion | quote }}
             {{- with .Values.global.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}

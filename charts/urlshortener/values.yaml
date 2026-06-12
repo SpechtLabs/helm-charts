@@ -43,6 +43,10 @@ urlshortener:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
 
+  # -- Value reported as service.version in telemetry (OTEL_SERVICE_VERSION).
+  # Defaults to the chart appVersion when empty.
+  otelServiceVersion: ""
+
   # Extra env variables to pass to the urlshortener container
   env: []
   extraEnvFrom: []
@@ -203,6 +207,10 @@ dashboard:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
+
+  # -- Value reported as service.version in telemetry (OTEL_SERVICE_VERSION).
+  # Defaults to the chart appVersion when empty.
+  otelServiceVersion: ""
 
   # Extra env variables to pass to the urlshortener-api container
   env: []
