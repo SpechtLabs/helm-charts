@@ -3,6 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: {{ include "tka.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "tka.labels" . | nindent 4 }}
 spec:

@@ -41,7 +41,7 @@
 {{- if .Values.serviceMonitor.enabled }}
 
 📊 Monitoring: ServiceMonitor created for Prometheus scraping.
-   Metrics available at: http://{{ include "tka.fullname" . }}:{{ .Values.service.metricsPort }}/metrics
+   Metrics available at: http://{{ include "tka.fullname" . }}:{{ .Values.tka.health.port }}/metrics
 
 {{- end }}
 
