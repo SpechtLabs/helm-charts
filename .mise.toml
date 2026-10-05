@@ -1,26 +1,88 @@
-[tools]
-# Go version from your go.mod file
-go = "1.27.1"
+# .mise.toml — local tooling, exact pins (repo convention)
+#
+# The tasks below define how the charts are linted and tested. CI uses these
+# tasks. Renovate keeps every pin in this file current.
 
-# Node.js for JavaScript/TypeScript
-node = "24.21.0"
-npm = "11.18.0"
+[settings]
+# The pins below are the only source of tool versions; mise never reads
+# .nvmrc, .tool-versions and friends.
+idiomatic_version_file_enable_tools = []
+
+[tools]
+# Charts. release.yaml packages them with chart-releaser, which builds
+# dependencies with this helm.
+helm = "4.3.0"
+# ct lints and installs the charts a pull request changes. It runs helm,
+# yamllint and kubectl from PATH.
+"aqua:helm/chart-testing" = "3.14.0"
+# ct install deploys into a throwaway kind cluster.
+kind = "0.33.0"
+kubectl = "1.37.1"
+# Packages and publishes the charts in release.yaml.
+"aqua:helm/chart-releaser" = "1.8.1"
 
 # Pre-commit for Git hooks
 pre-commit = "4.6.2"
 
-# Additional tools for development
-golangci-lint = "2.14.0"
-goreleaser = "2.18.2"
-kind = "0.33.0"
-kubectl = "1.37.1"
-markdownlint-cli2 = "0.38.0"
+# Linters
+yamllint = "1.38.0"
+actionlint = "1.7.12"
+# actionlint runs shellcheck on every `run:` script when it's on PATH, and
+# silently skips them when it isn't.
+shellcheck = "0.11.0"
+# markdownlint-cli2 is an npm package; mise installs it with this node.
+node = "24.21.0"
+markdownlint-cli2 = "0.23.3"
 
-swag = "1.16.6"
+# Pins GitHub Actions to commit SHAs (see the update-gha task)
+pinact = "5.0.0"
 
-[env]
-# Set environment variables for Go development
-GO111MODULE = "on"
+[tasks.lint]
+description = "Lint every chart with ct (helm lint and yamllint on Chart.yaml and values), YAML, workflows and Markdown"
+depends = ["chart-lint", "yaml-lint", "actionlint", "md-lint"]
 
-# Vue.js related environment variables
-NODE_ENV = "development"
+# --all lints every chart, not only the ones changed against main, and skips
+# the version-bump check, which only means something for a pull request (see
+# chart-lint-changed).
+[tasks.chart-lint]
+description = "Lint every chart with ct"
+run = "ct lint --config ct.yaml --all --check-version-increment=false"
+
+[tasks.chart-lint-changed]
+description = "Lint the charts changed against main with ct, including the chart version bump chart-releaser needs"
+run = "ct lint --config ct.yaml"
+
+# Needs a cluster: `kind create cluster` first, or point KUBECONFIG elsewhere.
+#
+# tka and urlshortener don't install on their default values: tka needs a
+# Tailscale tailnet and the cluster it fronts, and urlshortener's default
+# images (an upper-case repository, tag latest) don't exist, so its consumers
+# set their own. ct install would fail on any change to them, so it skips them
+# until they have ci/ values that install in a bare kind cluster.
+[tasks.chart-install]
+description = "Install the charts changed against main into the current cluster with ct and test them"
+run = "ct install --config ct.yaml --excluded-charts tka,urlshortener"
+
+[tasks.yaml-lint]
+description = "Lint every YAML file in the repository (chart templates excluded, see .yamllint.yaml)"
+run = "yamllint --strict ."
+
+[tasks.actionlint]
+description = "Lint the GitHub Actions workflows"
+run = "actionlint"
+
+[tasks.md-lint]
+description = "Lint the Markdown files"
+run = "markdownlint-cli2"
+
+[tasks.fmt]
+description = "Fix what markdownlint can fix in the Markdown files"
+run = "markdownlint-cli2 --fix"
+
+[tasks.check]
+description = "The definition of done: every gate CI runs, except ct install, which needs a cluster"
+depends = ["lint", "chart-lint-changed"]
+
+[tasks.update-gha]
+description = "Pin GitHub Actions to commit SHAs (Renovate keeps them current afterwards)"
+run = "pinact run"

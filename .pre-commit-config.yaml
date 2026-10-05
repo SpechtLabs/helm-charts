@@ -1,33 +1,51 @@
 repos:
   # Generic pre-commit hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0  # Use the latest version from https://github.com/pre-commit/pre-commit-hooks/releases
+    rev: v6.0.0
     hooks:
       - id: check-merge-conflict
       - id: detect-private-key
       - id: check-case-conflict
       - id: trailing-whitespace
-        exclude: ^pkg/swagger/
       - id: end-of-file-fixer
-        exclude: ^pkg/swagger/
+      # devcontainer.json is JSON with comments, which check-json rejects.
+      - id: check-json
+        exclude: ^\.devcontainer/devcontainer\.json$
       - id: mixed-line-ending
-        exclude: ^pkg/swagger/
       - id: check-added-large-files
         name: check for added large files
         description: Prevents giant files from being committed
-        args: ['--maxkb=500']
+        args: ["--maxkb=500"]
 
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.18.1
+    rev: v0.23.3
     hooks:
       - id: markdownlint-cli2
 
+  # Run the mise-pinned tools rather than copies pre-commit would build, so
+  # the hooks and CI agree on the versions. check-yaml is left out: chart
+  # templates aren't YAML until helm renders them, and yamllint covers the
+  # rest.
+  - repo: local
+    hooks:
+      - id: yamllint
+        name: yamllint
+        entry: mise exec -- yamllint --strict
+        language: system
+        types: [yaml]
+      - id: actionlint
+        name: actionlint
+        entry: mise exec -- actionlint
+        language: system
+        files: ^\.github/workflows/.*\.ya?ml$
+      - id: chart-lint
+        name: ct lint
+        entry: mise run chart-lint
+        language: system
+        files: ^charts/
+        pass_filenames: false
+
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.28.0  # Use the latest version
+    rev: v8.30.1
     hooks:
       - id: gitleaks
-
-  - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.1.30 
-    hooks:
-      - id: helmlint

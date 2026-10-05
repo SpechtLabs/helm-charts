@@ -81,7 +81,7 @@ tka:
       # Key containing the API endpoint
       apiEndpoint: "apiEndpoint"
       # Key containing the base64-encoded CA certificate data
-      caData: "caData" 
+      caData: "caData"
       # Key containing the insecure TLS verification flag
       insecure: "insecure"
     # Additional labels to add to the cluster info (separate from configMap data)

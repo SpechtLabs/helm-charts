@@ -2,7 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    ":semanticCommits"
+    ":semanticCommits",
+    "helpers:pinGitHubActionDigests",
+    "customManagers:githubActionsVersions"
   ],
   "timezone": "Europe/Berlin",
   "dependencyDashboard": true,
@@ -16,6 +18,16 @@
   "labels": [
     "dependencies"
   ],
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "labels": [
+      "dependencies",
+      "security"
+    ]
+  },
+  "pre-commit": {
+    "enabled": true
+  },
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": [
@@ -24,20 +36,6 @@
     "automerge": true
   },
   "customManagers": [
-    {
-      "customType": "regex",
-      "description": "Track the Go toolchain version pinned in .mise.toml.",
-      "managerFilePatterns": [
-        "/(^|/)\\.mise\\.toml$/"
-      ],
-      "matchStrings": [
-        "(?:^|\\n)go\\s*=\\s*\"(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)\""
-      ],
-      "depNameTemplate": "go",
-      "packageNameTemplate": "go",
-      "datasourceTemplate": "golang-version",
-      "versioningTemplate": "semver"
-    },
     {
       "customType": "regex",
       "description": "Track SpechtLabs/StaticPages releases as the static-pages chart appVersion",
@@ -66,6 +64,15 @@
     }
   ],
   "packageRules": [
+    {
+      "description": "mise is pinned as MISE_VERSION in every workflow that sets it up; move them at once, and only to a release a day old, the age mise-action waited for before the pin.",
+      "matchDepNames": [
+        "jdx/mise"
+      ],
+      "groupName": "mise",
+      "groupSlug": "mise",
+      "minimumReleaseAge": "1 day"
+    },
     {
       "description": "Automerge digest, pin, patch, and minor updates once CI passes.",
       "matchUpdateTypes": [
@@ -98,49 +105,6 @@
       "automergeType": "pr",
       "platformAutomerge": true,
       "dependencyDashboardApproval": false
-    },
-    {
-      "description": "Do not manage npm as a separate mise tool; Node provides npm.",
-      "matchFileNames": [
-        ".mise.toml"
-      ],
-      "matchDepNames": [
-        "npm"
-      ],
-      "enabled": false
-    },
-    {
-      "description": "Group Go module updates together.",
-      "matchManagers": [
-        "gomod"
-      ],
-      "groupName": "Go modules",
-      "groupSlug": "go-modules"
-    },
-    {
-      "description": "Update .mise.toml and go.mod Go versions together.",
-      "matchDatasources": [
-        "golang-version"
-      ],
-      "matchDepNames": [
-        "go"
-      ],
-      "groupName": "Go toolchain",
-      "groupSlug": "go-toolchain",
-      "rangeStrategy": "bump",
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "dependencyDashboardApproval": false
-    },
-    {
-      "description": "Group docs site dependencies together.",
-      "matchFileNames": [
-        "docs/package.json",
-        "docs/bun.lock"
-      ],
-      "groupName": "docs dependencies",
-      "groupSlug": "docs-dependencies"
     }
   ],
   "bumpVersions": [
