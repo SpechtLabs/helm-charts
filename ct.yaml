@@ -1,0 +1,11 @@
+# chart-testing (ct) settings, read by the chart-lint and chart-install tasks.
+target-branch: main
+chart-dirs:
+  - charts
+# yaml-lint (yamllint --strict .) lints every Chart.yaml and values.yaml with
+# .yamllint.yaml already; ct's own yamllint pass would lint them a second
+# time against a different config.
+validate-yaml: false
+# The Chart.yaml schema check runs yamale, a Python tool this repository
+# doesn't otherwise need; helm lint validates Chart.yaml too.
+validate-chart-schema: false

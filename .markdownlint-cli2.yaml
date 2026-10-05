@@ -6,13 +6,14 @@ config:
   MD013: false
   MD024: false
   MD038: false
+  # MD060: table pipe spacing; the chart READMEs use compact tables.
+  MD060: false
 
-# Include all Markdown files in the project
+# Every Markdown file in the repository: the README and the chart READMEs
+# helm packages with each chart.
 globs:
   - "**/*.md"
 
-# Ignore node_modules directory and other common patterns
 ignores:
-  - "docs/node_modules/**"
-  - ".git/**"
-  - "vendor/**"
+  - "**/node_modules/**"
+  - "dist/**"
