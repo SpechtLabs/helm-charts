@@ -17,7 +17,7 @@ permissions:
 env:
   # mise itself, pinned; charts.yaml explains why.
   # renovate: datasource=github-releases depName=jdx/mise extractVersion=^v(?<version>.+)$
-  MISE_VERSION: 2026.10.2
+  MISE_VERSION: 2026.10.3
 
 # Never cancel a release half-way: that can leave a release published with no
 # index entry. Every run pushes to gh-pages, so runs queue rather than race;
