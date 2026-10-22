@@ -35,7 +35,7 @@ node = "24.22.1"
 markdownlint-cli2 = "0.24.0"
 
 # Pins GitHub Actions to commit SHAs (see the update-gha task)
-pinact = "5.0.0"
+pinact = "5.0.1"
 
 [tasks.lint]
 description = "Lint every chart with ct (helm lint and yamllint on Chart.yaml and values), YAML, workflows and Markdown"
