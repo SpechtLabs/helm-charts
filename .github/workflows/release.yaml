@@ -74,7 +74,7 @@ jobs:
 
       - name: Set up mise
         if: steps.still-current.outputs.current == 'true'
-        uses: jdx/mise-action@6be3c7ed4c21d4f76b208d351d95aac273ebb76d # v5.2.4
+        uses: jdx/mise-action@6612f0ef07ed2a736cd1e00a94a065522dd41195 # v5.2.5
         with:
           version: ${{ env.MISE_VERSION }}
           install_args: helm aqua:helm/chart-releaser
@@ -89,7 +89,7 @@ jobs:
 
       - name: Run chart-releaser
         if: steps.still-current.outputs.current == 'true'
-        uses: helm/chart-releaser-action@df287104677278f869ca5480bd260358397cc3f9 # v1.8.0
+        uses: helm/chart-releaser-action@92c6b97fa9f664492a2592e0d1d80bc6bf378957 # v1.9.0
         with:
           install_dir: ${{ steps.cr.outputs.dir }}
           skip_existing: true
